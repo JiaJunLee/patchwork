@@ -6,10 +6,27 @@
 
 <struts>
 
-    <package name="com.sourcetech.patchwork" extends="struts-default" namespace="/">
-        <action name="hello" class="com.sourcetech.patchwork.Hello" method="hello">
-            <result name="SUCCESS">index.jsp</result>
+    <constant name="struts.devMode" value="true"></constant>
+
+    <package name="com.sourcetech.patchwork" extends="json-default" namespace="/">
+
+        <action name="reqPublicKey" class="com.sourcetech.patchwork.servers.oauth.OAuthServiceByPasswordCredentials" method="reqPublicKey">
+            <result type="json">
+                <param name="includeProperties">publicKey</param>
+            </result>
         </action>
+
+        <action name="test" class="com.sourcetech.patchwork.servers.oauth.OAuthServiceByPasswordCredentials" method="oAuthService">
+            <result>success.jsp</result>
+            <result name="member_not_exists">index.jsp</result>
+            <result name="input">rtest.jsp</result>
+        </action>
+
+        <action name="convert" class="com.sourcetech.patchwork.servers.testConvert" method="execute">
+            <result name="error">index.jsp</result>
+            <result>success.jsp</result>
+        </action>
+
     </package>
 
 </struts>

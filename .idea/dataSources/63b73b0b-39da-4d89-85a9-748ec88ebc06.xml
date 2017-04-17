@@ -15,24 +15,114 @@
     <schema id="9" parent="1" name="shop"/>
     <schema id="10" parent="1" name="test"/>
     <schema id="11" parent="1" name="testdb"/>
-    <table id="12" parent="2" name="user"/>
-    <column id="13" parent="12" name="USERNAME">
+    <table id="12" parent="2" name="patchwork_access_token"/>
+    <table id="13" parent="2" name="patchwork_member"/>
+    <table id="14" parent="2" name="patchwork_refresh_token"/>
+    <column id="15" parent="12" name="patchwork_member_m_id">
+      <Position>1</Position>
+      <DataType>int(11)|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="16" parent="12" name="access_token">
       <Position>2</Position>
-      <DataType>varchar(20)|0</DataType>
+      <DataType>varchar(100)|0</DataType>
+      <NotNull>1</NotNull>
     </column>
-    <column id="14" parent="12" name="PASSWORD">
+    <column id="17" parent="12" name="deadline">
       <Position>3</Position>
-      <DataType>varchar(20)|0</DataType>
+      <DataType>timestamp|0</DataType>
+      <NotNull>1</NotNull>
+      <DefaultExpression>CURRENT_TIMESTAMP</DefaultExpression>
     </column>
-    <column id="15" parent="12" name="ID">
+    <index id="18" parent="12" name="fk_patchwork_access_token_patchwork_member">
+      <ColNames>patchwork_member_m_id</ColNames>
+    </index>
+    <key id="19" parent="12" name="PRIMARY">
+      <ColNames>access_token</ColNames>
+      <Primary>1</Primary>
+    </key>
+    <foreign-key id="20" parent="12" name="fk_patchwork_access_token_patchwork_member">
+      <ColNames>patchwork_member_m_id</ColNames>
+      <RefSchemaName>patchwork_database</RefSchemaName>
+      <RefTableName>patchwork_member</RefTableName>
+      <RefColNames>m_id</RefColNames>
+      <OnUpdate>no-action</OnUpdate>
+      <OnDelete>no-action</OnDelete>
+    </foreign-key>
+    <column id="21" parent="13" name="m_id">
       <Position>1</Position>
       <DataType>int(11)|0</DataType>
       <NotNull>1</NotNull>
       <SequenceIdentity>1</SequenceIdentity>
     </column>
-    <key id="16" parent="12" name="PRIMARY">
-      <ColNames>ID</ColNames>
+    <column id="22" parent="13" name="m_hash_password">
+      <Position>2</Position>
+      <DataType>varchar(128)|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="23" parent="13" name="m_password_salt">
+      <Position>3</Position>
+      <DataType>varchar(50)|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="24" parent="13" name="m_email">
+      <Position>4</Position>
+      <DataType>varchar(45)|0</DataType>
+    </column>
+    <column id="25" parent="13" name="m_phone_number">
+      <Position>5</Position>
+      <DataType>varchar(12)|0</DataType>
+    </column>
+    <index id="26" parent="13" name="m_email_UNIQUE">
+      <ColNames>m_email</ColNames>
+      <Unique>1</Unique>
+    </index>
+    <index id="27" parent="13" name="m_phone_number_UNIQUE">
+      <ColNames>m_phone_number</ColNames>
+      <Unique>1</Unique>
+    </index>
+    <key id="28" parent="13" name="PRIMARY">
+      <ColNames>m_id</ColNames>
       <Primary>1</Primary>
     </key>
+    <key id="29" parent="13" name="m_email_UNIQUE">
+      <ColNames>m_email</ColNames>
+      <UnderlyingIndexName>m_email_UNIQUE</UnderlyingIndexName>
+    </key>
+    <key id="30" parent="13" name="m_phone_number_UNIQUE">
+      <ColNames>m_phone_number</ColNames>
+      <UnderlyingIndexName>m_phone_number_UNIQUE</UnderlyingIndexName>
+    </key>
+    <column id="31" parent="14" name="patchwork_member_m_id">
+      <Position>1</Position>
+      <DataType>int(11)|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="32" parent="14" name="refresh_token">
+      <Position>2</Position>
+      <DataType>varchar(100)|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="33" parent="14" name="deadline">
+      <Position>3</Position>
+      <DataType>timestamp|0</DataType>
+      <NotNull>1</NotNull>
+      <DefaultExpression>CURRENT_TIMESTAMP</DefaultExpression>
+    </column>
+    <index id="34" parent="14" name="fk_patchwork_refresh_token_patchwork_member1_idx">
+      <ColNames>patchwork_member_m_id</ColNames>
+    </index>
+    <key id="35" parent="14" name="PRIMARY">
+      <ColNames>refresh_token</ColNames>
+      <Primary>1</Primary>
+    </key>
+    <foreign-key id="36" parent="14" name="fk_patchwork_refresh_token_patchwork_member1">
+      <ColNames>patchwork_member_m_id</ColNames>
+      <RefSchemaName>patchwork_database</RefSchemaName>
+      <RefTableName>patchwork_member</RefTableName>
+      <RefColNames>m_id</RefColNames>
+      <OnUpdate>no-action</OnUpdate>
+      <OnDelete>no-action</OnDelete>
+    </foreign-key>
   </database-model>
 </dataSource>

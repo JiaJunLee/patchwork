@@ -18,7 +18,7 @@
         <!-- 设置数据库 -->
         <property name="hibernate.c3p0.idle_test_period">3000</property>
 
-        <property name="connection.url">jdbc:mysql://localhost:3306/patchwork_database?serverTimezone=UTC&amp;useUnicode=true&amp;characterEncoding=UTF-8</property>
+        <property name="connection.url">jdbc:mysql://localhost:3306/patchwork_database?serverTimezone=GMT%2b8&amp;useUnicode=true&amp;characterEncoding=UTF-8</property>
         <property name="connection.driver_class">com.mysql.jdbc.Driver</property>
         <property name="connection.username">root</property>
         <property name="connection.password">root</property>
@@ -26,7 +26,11 @@
         <property name="hibernate.current_session_context_class">thread</property>
         <property name="hibernate.show_sql">true</property>
 
-        <mapping class="com.sourcetech.patchwork.hibernate.model.UserEntity"/>
+        <mapping class="com.sourcetech.patchwork.hibernate.model.PatchworkMemberEntity"/>
+        <mapping class="com.sourcetech.patchwork.hibernate.model.PatchworkAccessTokenEntity"/>
+        <mapping class="com.sourcetech.patchwork.hibernate.model.PatchworkRefreshTokenEntity"/>
+
+        <!--<mapping class="com.sourcetech.patchwork.hibernate.model.UserEntity"/>-->
 
         <!-- DB schema will be updated if needed -->
         <!-- <property name="hbm2ddl.auto">update</property> -->
